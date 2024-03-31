@@ -1,5 +1,5 @@
 import React from 'react';
-import { AwesomeButton } from "react-awesome-button";
+import { Button } from '@mui/material';
 import "react-awesome-button/dist/styles.css";
 import {Puff} from "react-loader-spinner";
 
@@ -9,7 +9,7 @@ const SubmitLoad = ({ isLoading, onSubmit }) => {
       {isLoading ? (
         <Puff color="#00BFFF" height={100} width={100} />
       ) : (
-        <AwesomeButton onPress={onSubmit}>Submit Recording</AwesomeButton>
+        <Button onPress={onSubmit}>Submit Recording</Button>
       )}
     </div>
   );

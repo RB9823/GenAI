@@ -6,13 +6,27 @@ import SubmitLoad from './components/SubmitLoad';
 import Dictaphone from './components/Dictaphone';
 import Card from './components/Card';
 import Grid from '@mui/material/Grid';
-import { AwesomeButton } from "react-awesome-button";
-import "react-awesome-button/dist/styles.css";
+import { Button, CircularProgress } from '@mui/material';
+import { PlayArrow, Stop, Mic } from '@mui/icons-material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
+  const XS = 6;
+  const MD = 8;
+  const CONTAINER_SPACING = 3;
   const [tone, setTone] = useState('');
   const [percentage, setPercentage] = useState(0);
-  const [isRecording, setIsRecording] = useState(false); // New state to control recording and transcription
+  const [isRecording, setIsRecording] = useState(false);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#556cd6',
+      },
+      secondary: {
+        main: '#19857b',
+      },
+    },
+  });
 
   const handleStart = () => {
     setIsRecording(true);
@@ -32,32 +46,32 @@ function App() {
   }, []);
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={12} md={5}> 
-          <Card>
+      <Grid container spacing={CONTAINER_SPACING}>
+        <Grid item xs={12} md={6}>
+          <Card sx={{ padding: 2, margin: 2, boxShadow: 3 }}>
             <AudioRecorder isRecording={isRecording} onRecordComplete={onRecordComplete} />
+            <SubmitLoad isLoading={false} onSubmit={handleSubmit} />
+            <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+              <Button onClick={handleStart} disabled={isRecording} startIcon={<Mic />}>Start Recording</Button>
+              <Button onClick={handleStop} disabled={!isRecording} startIcon={<Stop />}>Stop Recording</Button>
+            </div>
           </Card>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6}>
           <Card>
             <Dictaphone isRecording={isRecording} />
           </Card>
         </Grid>
-        <AwesomeButton onPress={handleStart} disabled={isRecording}>Start</AwesomeButton>
-        <AwesomeButton onPress={handleStop} disabled={!isRecording}>Stop</AwesomeButton>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <SubmitLoad isLoading={false} onSubmit={handleSubmit} />
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <Card>
             <Chart tone={tone} percentage={percentage} />
           </Card>
         </Grid>
       </Grid>
     </div>
+    </ThemeProvider>
   );
 }
 
