@@ -1,0 +1,59 @@
+import React from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+
+// Register the components you're using
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend
+);
+
+const Chart = ({ tone, percentage }) => {
+  const data = {
+    labels: [tone],
+    datasets: [{
+      label: 'Tone Analysis', // Label for the dataset (not typically displayed in a pie chart)
+      data: [percentage], // Data point(s) for the dataset
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1,
+    }]
+  };
+
+  // Options for the chart can be defined here (optional for basic use cases)
+  const options = {
+    responsive: true, // Ensure the pie chart is responsive
+    plugins: {
+      legend: {
+        position: 'top', // Position the legend on the top
+      },
+      title: {
+        display: true, // Display a title
+        text: 'Tone Analysis', // Title text
+      },
+    },
+  };
+
+  return (
+    <div className="chart-display">
+      <Pie data={data} options={options} />
+    </div>
+  );
+};
+
+export default Chart;
