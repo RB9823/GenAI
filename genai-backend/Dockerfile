@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-ENV OPENAI_API_KEY='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'
+ENV OPENAI_API_KEY='OPENAI_API_KEY'
 
 RUN mkdir backend
 WORKDIR backend
