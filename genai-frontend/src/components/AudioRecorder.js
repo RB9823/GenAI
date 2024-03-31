@@ -11,8 +11,8 @@ const AudioRecorder = ({ onRecordComplete }) => {
         render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
           <div>
             <p>{status}</p>
-            <button onClick={startRecording}>Start Recording</button>
-            <button onClick={() => { stopRecording(); onRecordComplete(mediaBlobUrl); }}>Stop Recording</button>
+            <AwesomeButton onClick={startRecording}>Start Recording</AwesomeButton>
+            <AwesomeButton onClick={() => { stopRecording(); onRecordComplete(mediaBlobUrl); }}>Stop Recording</AwesomeButton>
             <audio src={mediaBlobUrl} controls />
           </div>
         )}
