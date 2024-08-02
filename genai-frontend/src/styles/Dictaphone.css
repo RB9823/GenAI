@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+.dictaphone-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.dictaphone-textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  transition: box-shadow 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  min-height: 100px;
+  max-height: 40vh;  
+  resize: vertical; 
+}
+
+.dictaphone-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dictaphone-textarea:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.dictaphone-resetButton {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  color: white;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  border: none;
+  }
+  
+  .dictaphone-resetButton:hover {
+  transform: perspective(200px) translateZ(13px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }

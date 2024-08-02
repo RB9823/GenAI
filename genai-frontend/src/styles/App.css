@@ -1,0 +1,31 @@
+/* General styles */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-bg-color: #0C134F;
+  --secondary-bg-color: #1D267D;
+  --tertiary-bg-color: #5C469C;
+  --quaternary-bg-color: #D4ADFC;
+}
+
+.App {
+  background: radial-gradient(circle at 180%,var(--primary-bg-color), var(--secondary-bg-color), var(--tertiary-bg-color), var(--quaternary-bg-color));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

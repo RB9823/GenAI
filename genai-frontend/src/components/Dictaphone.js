@@ -1,34 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import '../styles/Dictaphone.css';
 
-const Dictaphone = ({ isRecording }) => {
-  const { transcript: initialTranscript, resetTranscript, browserSupportsSpeechRecognition, listening, startListening, stopListening } = useSpeechRecognition();
+// Component to be re-written to handle buttons; 
+// core logic ported to Flask Backend,
+// leveraging the Whisper model for better lang support
+
+const Dictaphone = ({ isRecording, onTranscriptChange }) => {
+  const {
+    transcript: initialTranscript,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+    listening,
+  } = useSpeechRecognition();
+
   const [transcript, setTranscript] = useState(initialTranscript);
 
   useEffect(() => {
     if (isRecording && !listening) {
-        SpeechRecognition.startListening({ continuous: true });
+      SpeechRecognition.startListening({ continuous: true });
     } else if (!isRecording && listening) {
-        SpeechRecognition.stopListening();
+      SpeechRecognition.stopListening();
     }
-  }, [isRecording, listening, startListening, stopListening]);
+  }, [isRecording, listening]);
 
   useEffect(() => {
     setTranscript(initialTranscript);
-  }, [initialTranscript]);
+    onTranscriptChange(initialTranscript);
+  }, [initialTranscript, onTranscriptChange]);
 
-  const handleTranscriptChange = (event) => {
+  const handleTranscriptChange = useCallback((event) => {
     setTranscript(event.target.value);
-  };
+    onTranscriptChange(event.target.value);
+  }, [onTranscriptChange]);
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Your browser does not support speech recognition.</span>;
+    return <span>Your browser does not support speech recognition. Please use Chrome.</span>;
   }
 
   return (
-    <div>
-      <textarea value={transcript} onChange={handleTranscriptChange} rows={5} style={{ width: '100%' }} />
-      <button onClick={resetTranscript}>Reset</button>
+    <div className="dictaphone-container">
+      <textarea
+        value={transcript}
+        onChange={handleTranscriptChange}
+        rows={5}
+        className="dictaphone-textarea"
+        placeholder="Real-time transcription will appear here..."
+        autoFocus
+      />
+      <button onClick={resetTranscript} className="dictaphone-resetButton">Reset</button>
     </div>
   );
 };
