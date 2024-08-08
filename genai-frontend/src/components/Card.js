@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MuiCard from '@mui/material/Card'; // Alias MUI's Card as MuiCard
+import MuiCard from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';

@@ -69,8 +69,8 @@ function App() {
         <Grid container justifyContent="center" alignItems="center" className="main-container">
           <Card
             sx={{
-              background: 'rgba(31, 41, 55, 0.6)',
-              backdropFilter: 'blur(10px)',
+              background: 'rgba(31, 41, 55, 0.8)',
+              backdropFilter: 'blur(5px)',
               padding: '30px',
               borderRadius: '20px',
               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
